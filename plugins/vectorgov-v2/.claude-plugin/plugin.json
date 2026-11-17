@@ -1,0 +1,12 @@
+{
+  "name": "vectorgov-v2",
+  "version": "1.0.0",
+  "description": "Pesquisa jurídica em licitações e contratações públicas, com fonte verificável: legislação vigente (Lei 14.133/2021 e normas correlatas), jurisprudência do TCU, catálogo oficial de compras (CATMAT/CATSER) e skills de método da fase preparatória. Cada resposta traz o link da fonte.",
+  "author": {
+    "name": "VectorGov",
+    "url": "https://vectorgov.io"
+  },
+  "homepage": "https://vectorgov.io",
+  "license": "MIT",
+  "keywords": ["licitações", "lei 14.133", "compras públicas", "contratos administrativos", "jurisprudência", "TCU", "acórdãos", "CATMAT", "CATSER", "brasil"]
+}

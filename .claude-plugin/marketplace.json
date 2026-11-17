@@ -1,0 +1,16 @@
+{
+  "name": "vectorgov-v2",
+  "description": "Plugin do VectorGov para o Claude: legislação de licitações e contratações públicas, jurisprudência do TCU e catálogo oficial de compras, com o link da fonte em cada resposta.",
+  "owner": {
+    "name": "VectorGov",
+    "email": "comercial@etaldev.com.br"
+  },
+  "plugins": [
+    {
+      "name": "vectorgov-v2",
+      "source": "./plugins/vectorgov-v2",
+      "description": "Pesquisa jurídica em licitações e contratações públicas, com fonte verificável: legislação vigente (Lei 14.133/2021 e normas correlatas), jurisprudência do TCU, catálogo oficial de compras (CATMAT/CATSER) e skills de método da fase preparatória. Cada resposta traz o link da fonte.",
+      "homepage": "https://vectorgov.io"
+    }
+  ]
+}
