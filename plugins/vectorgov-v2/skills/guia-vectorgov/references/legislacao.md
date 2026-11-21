@@ -1,6 +1,6 @@
 ---
 title: Legislação
-when: "Antes de filtrar por norma, usar o parâmetro assunto, ler uma tabela de anexo ou paginar temas, e na dúvida entre hybrid, grep e lookup."
+when: "Antes de filtrar por norma, usar o parâmetro assunto, ler uma tabela de anexo ou paginar temas, e na dúvida entre legislacao_buscar, legislacao_grep e legislacao_ler."
 ---
 
 # Legislação
@@ -8,12 +8,12 @@ when: "Antes de filtrar por norma, usar o parâmetro assunto, ler uma tabela de 
 As ferramentas de legislação consultam o **perfil de acervo ativo** da conta. Por padrão, é a legislação federal de
 licitações. O resultado diz de que norma veio cada dispositivo.
 
-## `hybrid`: busca por assunto, a ferramenta padrão
+## `legislacao_buscar`: busca por assunto, a ferramenta padrão
 
 Busca por significado. Serve para pergunta aberta ou temática, quando não se sabe qual artigo responde.
 
 - **Resultados são trechos.** Servem para localizar e sintetizar. Para transcrever, leia o dispositivo inteiro com
-  `lookup`.
+  `legislacao_ler`.
 - **Tamanho da janela.** O padrão é `top_k=10`, que basta para responder; uma janela maior não melhora a resposta
   direta. Use `top_k=20` só num levantamento exaustivo pedido pelo usuário ("todos os dispositivos sobre…"), e
   organize o resultado por grupos.
@@ -25,7 +25,7 @@ Busca por significado. Serve para pergunta aberta ou temática, quando não se s
   Anexo Y do …"). As linhas mostradas são uma amostra. Ela não basta para dar um valor exato (alíquota, taxa, item
   por código NCM) nem para dizer que um item não consta da tabela. Diga isso ao usuário e aponte o link do PDF.
 
-## `lookup`: leitura direta de um dispositivo
+## `legislacao_ler`: leitura direta de um dispositivo
 
 Para quando a referência é conhecida, ou quando você precisa do texto inteiro para citar.
 
@@ -38,7 +38,7 @@ Para quando a referência é conhecida, ou quando você precisa do texto inteiro
 - **Identidade:** confira se a norma e o dispositivo devolvidos são os pedidos. Se vier outra norma ou outro
   dispositivo, não cite como resposta ao pedido.
 
-## `grep`: termo literal
+## `legislacao_grep`: termo literal
 
 Procura a string exata no **texto oficial**: siglas (ETP, PCA, TR, SRP), expressões ("dispensa eletrônica") e
 referências cruzadas ("onde se cita o art. 191").
@@ -55,7 +55,7 @@ em páginas: se o usuário quer o panorama completo, avance com `page`.
 
 ## O parâmetro `assunto`
 
-Nas ferramentas `hybrid`, `grep` e `filtrar_por_tema`, quando elas o oferecem, o parâmetro opcional `assunto` lê só
+Nas ferramentas `legislacao_buscar`, `legislacao_grep` e `filtrar_por_tema`, quando elas o oferecem, o parâmetro opcional `assunto` lê só
 as normas de um **assunto público** (ex.: reforma tributária), no lugar do perfil ativo. Os códigos disponíveis vêm
 em `menu` e `situacao_conta`. Use-o quando a pergunta for desse assunto; sem ele, vale o perfil ativo.
 
@@ -70,9 +70,9 @@ em `menu` e `situacao_conta`. Use-o quando a pergunta for desse assunto; sem ele
 
 | Pedido | Chamada |
 |---|---|
-| "Quais são os casos de dispensa de licitação?" | `hybrid` com "casos de dispensa de licitação" |
-| "Me mostra o art. 6º da Lei 14.133" | `lookup` com "Art. 6 da Lei 14.133/2021" |
-| "Preciso do texto dos arts. 6, 18 e 75" | `lookup` com as três referências numa chamada |
-| "Onde aparece a sigla PCA?" | `grep` com "PCA" |
-| "Qual o limite atual da dispensa por valor?" | `lookup` do art. 75 e `hybrid` pelo decreto que atualiza os valores |
+| "Quais são os casos de dispensa de licitação?" | `legislacao_buscar` com "casos de dispensa de licitação" |
+| "Me mostra o art. 6º da Lei 14.133" | `legislacao_ler` com "Art. 6 da Lei 14.133/2021" |
+| "Preciso do texto dos arts. 6, 18 e 75" | `legislacao_ler` com as três referências numa chamada |
+| "Onde aparece a sigla PCA?" | `legislacao_grep` com "PCA" |
+| "Qual o limite atual da dispensa por valor?" | `legislacao_ler` do art. 75 e `legislacao_buscar` pelo decreto que atualiza os valores |
 | "O que dá para consultar aqui?" | `filtrar_por_tema` sem tema, ou `menu` |

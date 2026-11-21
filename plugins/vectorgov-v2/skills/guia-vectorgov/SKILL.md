@@ -52,9 +52,9 @@ Fora da base, e como reagir:
 
 | O usuário quer… | Ferramenta | Detalhe em |
 |---|---|---|
-| ler um artigo, parágrafo ou inciso que ele já sabe qual é | `lookup` (até 20 referências por chamada) | `legislacao.md` |
-| saber onde aparece uma sigla ou expressão literal (ETP, PCA, "dispensa eletrônica") | `grep` | `legislacao.md` |
-| entender um tema ("o que a lei diz sobre…", "como funciona…") | `hybrid`, a busca padrão | `legislacao.md` |
+| ler um artigo, parágrafo ou inciso que ele já sabe qual é | `legislacao_ler` (até 20 referências por chamada) | `legislacao.md` |
+| saber onde aparece uma sigla ou expressão literal (ETP, PCA, "dispensa eletrônica") | `legislacao_grep` | `legislacao.md` |
+| entender um tema ("o que a lei diz sobre…", "como funciona…") | `legislacao_buscar`, a busca padrão | `legislacao.md` |
 | explorar o que existe, sem saber o que perguntar | `filtrar_por_tema` ou `menu` | `legislacao.md` |
 | saber o que o TCU decidiu ou entende sobre um tema | `acordaos_buscar` | `acordaos.md` |
 | achar uma expressão literal nos acórdãos | `acordaos_grep` | `acordaos.md` |
@@ -69,7 +69,7 @@ Fora da base, e como reagir:
 | fazer uma pesquisa de preços ou um valor estimado | seção "Pesquisa de preços" abaixo | — |
 | ver ou trocar o acervo consultado | `listar_perfis_acervo` e `selecionar_perfil_acervo` | `acervos-e-paineis.md` |
 | saber se a conta pode consultar | `situacao_conta` | seção "Limites e erros" |
-| seguir um método de tarefa, como o ETP | `skills_catalogo` e `skill_abrir` | seção "Outras skills" |
+| elaborar um estudo técnico preliminar (ETP) ou seguir outro método de tarefa | `skills_catalogo` e `skill_abrir` | seção "Skills de tarefa" |
 
 **Legislação e jurisprudência ficam separadas.** "O que a lei exige" é legislação; "o que o TCU decidiu" é
 jurisprudência. Se a pergunta pede os dois, use as duas famílias e mantenha as fontes separadas na resposta: o
@@ -99,7 +99,7 @@ norma:
 As três camadas ficam distintas na resposta: texto da norma, nota do especialista e jurisprudência.
 
 **Transcrever exige o texto inteiro.** A busca por assunto devolve trechos. Antes de escrever "conforme o art. X:
-'…'", leia o dispositivo com `lookup`.
+'…'", leia o dispositivo com `legislacao_ler`.
 
 ## Como montar a resposta
 
@@ -124,7 +124,7 @@ Antes de concluir, confira três coisas:
 ## Quando a busca vem vazia ou fraca
 
 1. Reformule com sinônimos jurídicos, abra a sigla ("ETP" → "estudo técnico preliminar") ou simplifique a frase.
-2. Para sigla ou termo técnico, tente a busca literal (`grep` ou `acordaos_grep`).
+2. Para sigla ou termo técnico, tente a busca literal (`legislacao_grep` ou `acordaos_grep`).
 3. Para tema amplo, tente `filtrar_por_tema`.
 4. Só então diga que não encontrou, conte o que buscou e sugira outra formulação.
 
@@ -134,9 +134,10 @@ não existe. A prova de que algo não existe vem das ferramentas que contam o to
 
 ## Limites e erros
 
-- **Ritmo.** Cada conta tem um limite de chamadas por minuto (30 em 60 segundos); ler skills tem limite à parte.
+- **Ritmo.** Cada conta tem um limite de chamadas por minuto, que depende do plano; ler skills tem limite à parte.
   Agrupe referências e códigos numa chamada, não repita uma consulta já respondida e não rode lotes em paralelo.
-  Com "Limite de chamadas atingido", espere 60 segundos antes de seguir, sem repetir em laço.
+  Quando o limite é atingido, a ferramenta avisa com "Limite de chamadas atingido" e diz quanto esperar: espere
+  esse tempo antes de seguir, sem repetir em laço.
 - **Conta.** As consultas não consomem créditos. Se uma ferramenta responder "Consulta indisponível para esta
   conta", chame `situacao_conta` e repasse a mensagem dela ao usuário. Plano e assinatura ficam em vectorgov.io.
 - **Ferramentas ausentes ou login pendente.** Oriente o usuário a conectar o VectorGov nas configurações de
@@ -163,18 +164,22 @@ pedir a lista do que é possível, mostre o resultado de `menu` por inteiro.
 ## Pesquisa de preços
 
 - **Se a conta tem as ferramentas de preços** (os nomes começam com `pesquisa_precos_`): antes do primeiro passo,
-  abra a skill `pesquisa-precos` com `skill_abrir` e siga-a. É ela que conduz o método, os avisos e as escolhas do
-  usuário.
+  abra a skill de pesquisa de preços pelo catálogo: ache-a em `skills_catalogo`, abra com `skill_abrir` e siga-a.
+  Ela não vem instalada junto com o conector. É ela que conduz o método, os avisos e as escolhas do usuário.
 - **Se a conta não tem essas ferramentas:** não prometa a pesquisa de preços e não monte um valor estimado com
   preços da memória ou da internet. Diga que a pesquisa de preços ainda não está disponível para a conta. Você pode
   ajudar com a parte normativa (art. 23 da Lei 14.133/2021 e IN SEGES/ME nº 65/2021) e com o código do catálogo.
 
-## Outras skills
+## Skills de tarefa
 
-O catálogo de skills (`skills_catalogo`) traz métodos de tarefa da fase preparatória, como o ETP. Quando o pedido
-for uma dessas tarefas, abra a skill que casar com ele (`skill_abrir`). Este guia continua valendo junto: a skill de
-tarefa diz o método; este guia diz como consultar e citar. Se você já está lendo este guia, não precisa abri-lo de
-novo pelo catálogo.
+Este guia é a única skill que vem instalada junto com o conector. Os métodos de tarefa da fase preparatória, como a
+pesquisa de preços e o estudo técnico preliminar (ETP), ficam no catálogo de skills. Quando o pedido for uma dessas
+tarefas, liste o catálogo com `skills_catalogo`, abra a skill que casar com o pedido com `skill_abrir` e leia os
+módulos dela com `skill_ler`. Se o catálogo não trouxer a skill da tarefa, diga que o método ainda não está
+disponível para a conta e ajude com a parte normativa, citando a fonte.
+
+Este guia continua valendo junto: a skill de tarefa diz o método; este guia diz como consultar e citar. Se você já
+está lendo este guia, não precisa abri-lo de novo pelo catálogo.
 
 ## Módulos
 
