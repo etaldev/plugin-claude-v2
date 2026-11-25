@@ -35,6 +35,10 @@ módulos listados no fim.
   perfis de acervo, como o de um tribunal ou de uma empresa estatal. Veja o módulo `references/acervos-e-paineis.md`.
 - **Assuntos públicos**, como a reforma tributária, lidos pelo parâmetro `assunto` das ferramentas de legislação.
   A lista de códigos vem nas ferramentas `menu` e `situacao_conta`.
+- **Constituição Federal e ADCT**, num assunto público próprio. A citação de um dispositivo deles é lida pela
+  `legislacao_ler` sem o parâmetro ("Art. 37, inciso XXI da Constituição Federal", "Art. 76 do ADCT"); a busca por
+  tema neles usa o código do assunto. No resultado, o `document_id` é `CONSTITUICAO-1988` ou `ADCT-1988`, e o link do
+  documento original abre a página oficial do Planalto.
 - **Jurisprudência do TCU:** o recorte do Informativo de Licitações e Contratos, não o acervo inteiro do Tribunal.
 - **Catálogo de compras (CATMAT e CATSER):** código, descrição oficial, padrão descritivo e unidades. O catálogo
   não tem preços.
